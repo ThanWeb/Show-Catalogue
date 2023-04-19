@@ -8,7 +8,9 @@
                 <h1>{{ show.name }}</h1>
                 <p>{{ show.type }}, {{ show.language }}</p>
                 <p>Status: {{ show.status }}</p>
-                <a :href="show.url" target="_blank">Watch</a>
+                <a :href="show.url" target="_blank" class="underline hover:text-teal-50 hover:font-semibold">
+                    Watch
+                </a>
                 <button @click="$emit('change-active-card', index)" class="mt-6 rounded-lg hover:text-teal-50 hover:font-semibold">More Info</button>
             </div>
         </div>
