@@ -3,9 +3,8 @@ import ShowCard from './components/ShowCard.vue'
 </script>
 
 <template>
-    <div>
-        <ShowCard v-for="(item, index) in shows" v-bind="item" :key="index"/>
-        <h1 class="text-red-700">a</h1>
+    <div class="container grid gap-6 lg:gap-8 sm:grid-cols-2 lg:grid-cols-4 px-6 py-6 sm:py-10 lg:py-16 mx-auto">
+        <ShowCard v-for="(item, index) in shows" v-bind="item" :key="index" :index="index" @change-active-card="changeActiveCard(index)" :active-card="activeCard"/>
     </div>
 </template>
 
@@ -13,7 +12,8 @@ import ShowCard from './components/ShowCard.vue'
 export default {
     data () {
         return {
-            shows: []
+            shows: [],
+            activeCard: -1
         }
     },
     mounted () {
@@ -24,6 +24,13 @@ export default {
             const response = await fetch('http://api.tvmaze.com/search/shows?q=girls')
             const responseJson = await response.json()
             this.shows = responseJson
+        },
+        changeActiveCard (index) {
+            if (this.activeCard === index) {
+                this.activeCard = -1
+            } else {
+                this.activeCard = index
+            }
         }
     }
 }
